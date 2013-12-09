@@ -7,6 +7,8 @@ Space complexity: O(max_value - min_value)
 
 
 def counting_sort(data):
+    if len(data) <= 1:
+        return
     min_value = min(data)
     max_value = max(data)
     count_list = [0]*(max_value-min_value+1)
