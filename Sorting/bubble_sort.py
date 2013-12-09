@@ -18,4 +18,3 @@ def bubble_sort(data, min_value=0, max_value=0):
                 tmp = data[i]
                 data[i] = data[i+1]
                 data[i+1] = tmp
-    return data

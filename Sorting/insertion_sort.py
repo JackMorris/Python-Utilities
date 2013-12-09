@@ -19,4 +19,3 @@ def insertion_sort(data, min_val=0, max_val=0):
             else:
                 break
         data[j] = to_insert
-    return data

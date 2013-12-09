@@ -18,4 +18,3 @@ def selection_sort(data, min_val=0, max_val=0):
         tmp = data[i]
         data[i] = data[current_min_index]
         data[current_min_index] = tmp
-    return data

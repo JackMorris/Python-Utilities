@@ -8,4 +8,4 @@ Each module contains an implementation of a sorting algorithm indicated by the n
 * `data` is an array of the integers to sort.
 * `min_val` and `max_val` are only required for non-comparative algorithms; this is indicated in the specific scripts. These indicate the minimum and maximum values in data.
 
-Each implementation returns an array of all values in data, but sorted in ascending order.
+Each implementation modifies the original list and sorts it into ascending order, returning None.
