@@ -8,6 +8,8 @@ Note: only valid when all values in data > 0
 
 
 def radix_sort(data):
+    if len(data) <= 1:
+        return
     max_value = max(data)
     digits_in_max = len(str(max_value))
     for i in range(0, digits_in_max):
