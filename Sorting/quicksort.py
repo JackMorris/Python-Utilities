@@ -33,5 +33,5 @@ def _quicksort(data, start_index, end_index):
     _quicksort(data, partition_index+1, end_index)
 
 
-def quicksort(data, min_value=0, max_value=0):
+def quicksort(data):
     _quicksort(data, 0, len(data))

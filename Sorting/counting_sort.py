@@ -1,13 +1,14 @@
-""" Couting Sort
+""" Counting Sort
 
 Time complexity: O(n)
-Space complexity: O(max - min)
-Min and max parameters are required as this sort is non comparative
+Space complexity: O(max_value - min_value)
 
 """
 
 
-def counting_sort(data, min_value, max_value):
+def counting_sort(data):
+    min_value = min(data)
+    max_value = max(data)
     count_list = [0]*(max_value-min_value+1)
     for i in range(0, len(data)):
         count_index = data[i]-min

@@ -39,5 +39,5 @@ def _merge_sort(data, start_index, end_index):
     _merge(data, start_index, split_index, end_index)
 
 
-def merge_sort(data, min_value=0, max_value=0):
+def merge_sort(data):
     _merge_sort(data, 0, len(data))

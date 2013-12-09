@@ -7,7 +7,7 @@ Space complexity: O(n) total, O(1) auxiliary (in place)
 """
 
 
-def bubble_sort(data, min_value=0, max_value=0):
+def bubble_sort(data):
     swap_made = True
     while swap_made:
         swap_made = False

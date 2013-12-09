@@ -6,6 +6,5 @@ Each module contains an implementation of a sorting algorithm indicated by the n
 `<algorithm name>(data, min_val=0, max_val=0)`
 
 * `data` is an array of the integers to sort.
-* `min_val` and `max_val` are only required for non-comparative algorithms; this is indicated in the specific scripts. These indicate the minimum and maximum values in data.
 
 Each implementation modifies the original list and sorts it into ascending order, returning None.

@@ -7,7 +7,7 @@ Space complexity: O(n) total, O(1) auxiliary (in place)
 """
 
 
-def selection_sort(data, min_val=0, max_val=0):
+def selection_sort(data):
     for i in range(0, len(data)):
         current_min_index = i
         for j in range(i+1, len(data)):

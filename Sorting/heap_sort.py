@@ -22,7 +22,7 @@ def _max_heapify(data, index, end_index):
         _max_heapify(data, largest_index, end_index)
 
 
-def heap_sort(data, min_value=0, max_value=0):
+def heap_sort(data):
     # Build max heap
     heapify_start_index = int(len(data)/2)
     end_index = len(data)
