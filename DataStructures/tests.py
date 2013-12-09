@@ -1,6 +1,48 @@
+from queue import *
 from stack import *
 import unittest
 import random
+
+
+class TestQueue(unittest.TestCase):
+    def setUp(self):
+        self.q = Queue()
+
+    def test_empty_queue(self):
+        self.assertTrue(self.q.is_empty())
+
+    def test_single_item_non_empty(self):
+        self.q.enqueue(random.randint(-1000000, 1000000))
+        self.assertFalse(self.q.is_empty())
+
+    def test_single_item_enqueue_dequeue_empty(self):
+        self.q.enqueue(random.randint(-1000000, 1000000))
+        self.q.dequeue()
+        self.assertTrue(self.q.is_empty())
+
+    def test_single_item_enqueue_dequeue_value(self):
+        value = random.randint(-1000000, 1000000)
+        self.q.enqueue(value)
+        pop_value = self.q.dequeue()
+        self.assertEqual(value, pop_value)
+
+    def test_multi_item_enqueue_dequeue_non_empty(self):
+        for i in range(0, random.randint(10,100)):
+            self.q.enqueue(random.randint(-1000000, 1000000))
+        self.assertFalse(self.q.is_empty())
+
+    def test_multi_item_enqueue_dequeue_empty(self):
+        for i in range(0, 1000):
+            self.q.enqueue(random.randint(-1000000, 1000000))
+        for i in range(0, 1000):
+            self.q.dequeue()
+        self.assertTrue(self.q.is_empty())
+
+    def test_multi_item_enqueue_dequeue_value(self):
+        for i in range(-100, 100):
+            self.q.enqueue(i)
+        for i in range(-100, 100):
+            self.assertEqual(self.q.dequeue(), i)
 
 
 class TestStack(unittest.TestCase):
