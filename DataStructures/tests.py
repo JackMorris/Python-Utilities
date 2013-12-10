@@ -1,13 +1,13 @@
-from linked_list import *
-from queue import *
-from stack import *
+import linked_list
+import dequeue
+import stack
 import unittest
 import random
 
 
 class TestLinkedList(unittest.TestCase):
     def setUp(self):
-        self.l = LinkedList()
+        self.l = linked_list.LinkedList()
 
     def test_empty_list(self):
         self.assertTrue(self.l.is_empty())
@@ -85,7 +85,7 @@ class TestLinkedList(unittest.TestCase):
 
 class TestQueue(unittest.TestCase):
     def setUp(self):
-        self.q = Queue()
+        self.q = dequeue.MyQueue()
 
     def test_empty_queue(self):
         self.assertTrue(self.q.is_empty())
@@ -126,7 +126,7 @@ class TestQueue(unittest.TestCase):
 
 class TestStack(unittest.TestCase):
     def setUp(self):
-        self.s = Stack()
+        self.s = stack.Stack()
 
     def test_empty_stack(self):
         self.assertTrue(self.s.is_empty())
