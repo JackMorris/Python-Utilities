@@ -5,7 +5,7 @@ import dequeue
 import stack
 import unittest
 import random
-import vEB_tree
+import veb_tree
 
 
 class TestBinarySearchTree(unittest.TestCase):
