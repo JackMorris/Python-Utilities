@@ -1,9 +1,87 @@
+import binary_search_tree
 import binary_tree
 import linked_list
 import dequeue
 import stack
 import unittest
 import random
+
+
+class TestBinarySearchTree(unittest.TestCase):
+    def setUp(self):
+        self.bst = binary_search_tree.BinarySearchTree()
+
+    def test_empty_tree_contains_false(self):
+        self.assertFalse(self.bst.contains(random.randint(-1000000, 1000000)))
+
+    def test_single_item_contains(self):
+        key = random.randint(-1000000, 1000000)
+        self.bst.set(key, 0)
+        self.assertTrue(self.bst.contains(key))
+
+    def test_single_item_contains_false(self):
+        key = random.randint(-100, 100)
+        self.bst.set(key, 0)
+        for i in range(-100, 101):
+            self.assertFalse(self.bst.contains(i) and i != key)
+
+    def test_single_item_get(self):
+        key = random.randint(-100, 100)
+        value = random.randint(-100, 100)
+        self.bst.set(key, value)
+        self.assertEqual(value, self.bst.get(key))
+
+    def test_multiple_item_get(self):
+        for i in range(-100, 100):
+            self.bst.set(i, i*2)
+        for i in range(-100, 100):
+            self.assertEqual(i*2, self.bst.get(i))
+
+    def test_single_item_set(self):
+        key = random.randint(-100, 100)
+        value = random.randint(100, 200)
+        self.bst.set(key, 0)
+        self.bst.set(key, value)
+        self.assertEqual(self.bst.get(key), value)
+
+    def test_multiple_item_set(self):
+        for i in range(-100, 100):
+            self.bst.set(i, -1)
+        for i in range(-100, 100):
+            self.bst.set(i, i**2)
+        for i in range(-100, 100):
+            self.assertEqual(self.bst.get(i), i**2)
+
+    def test_single_item_delete(self):
+        self.bst.set(10, 0)
+        self.bst.delete(10)
+        self.assertFalse(self.bst.contains(10))
+
+    def test_multiple_item_contains(self):
+        for i in range(-100, 100):
+            self.bst.set(i, 0)
+        for i in range(-100, 100):
+            self.assertTrue(self.bst.contains(i))
+
+    def test_multiple_item_contains_false(self):
+        for i in range(-100, 100):
+            self.bst.set(i, 0)
+        for i in range(-500, -100):
+            self.assertFalse(self.bst.contains(i))
+        for i in range(100, 500):
+            self.assertFalse(self.bst.contains(i))
+
+    def test_multiple_item_delete(self):
+        for i in range(-100, 100):
+            self.bst.set(i, 0)
+        values_to_delete = sorted(list({random.randint(-100, 99) for i in range(0, 50)}))
+        for v in values_to_delete:
+            self.bst.delete(v)
+        for i in range(-100, 100):
+            if i in values_to_delete:
+                self.assertFalse(self.bst.contains(i))
+            else:
+                self.assertTrue(self.bst.contains(i))
 
 
 class TestBinaryTree(unittest.TestCase):
@@ -46,7 +124,7 @@ class TestBinaryTree(unittest.TestCase):
     def test_multiple_item_delete(self):
         for i in range(-100, 100):
             self.b.add(i)
-        values_to_delete = sorted(list({random.randint(-100, 100) for i in range(0, 50)}))
+        values_to_delete = sorted(list({random.randint(-100, 99) for i in range(0, 50)}))
         for v in values_to_delete:
             self.b.delete(v)
         for i in range(-100, 100):
