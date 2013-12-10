@@ -1,7 +1,86 @@
+from linked_list import *
 from queue import *
 from stack import *
 import unittest
 import random
+
+
+class TestLinkedList(unittest.TestCase):
+    def setUp(self):
+        self.l = LinkedList()
+
+    def test_empty_list(self):
+        self.assertTrue(self.l.is_empty())
+
+    def test_single_item_append_non_empty(self):
+        self.l.append(random.randint(-1000000, 1000000))
+        self.assertFalse(self.l.is_empty())
+
+    def test_single_item_add_non_empty(self):
+        self.l.add(random.randint(-1000000, 1000000), 0)
+        self.assertFalse(self.l.is_empty())
+
+    def test_single_item_append_value(self):
+        value = random.randint(-1000000, 1000000)
+        self.l.append(value)
+        ret_value = self.l.get(0)
+        self.assertEqual(value, ret_value)
+
+    def test_single_item_add_value(self):
+        value = random.randint(-1000000, 1000000)
+        self.l.add(value, 0)
+        ret_value = self.l.get(0)
+        self.assertEqual(value, ret_value)
+
+    def test_single_item_remove_empty(self):
+        self.l.append(random.randint(-1000000, 1000000))
+        self.l.remove(0)
+        self.assertTrue(self.l.is_empty())
+
+    def test_multi_item_contains(self):
+        for i in range(0, 100):
+            self.l.append(i)
+        for i in range(0, 100):
+            self.assertTrue(self.l.contains(i))
+
+    def test_multi_item_contains_false(self):
+        for i in range(0, 100):
+            self.l.append(i)
+        for i in range(-10, 0):
+            self.assertFalse(self.l.contains(i))
+        for i in range(100, 110):
+            self.assertFalse(self.l.contains(i))
+
+    def test_multi_item_get(self):
+        for i in range(0, 1000):
+            self.l.append(i**2)
+        for i in range(0, 10):
+            index = random.randint(0, 999)
+            val = self.l.get(index)
+            self.assertEqual(val, index**2)
+
+    def test_multi_item_set(self):
+        for i in range(0, 1000):
+            self.l.append(1)
+        for i in range(0, 1000):
+            self.l.set(i*2, i)
+        for i in range(0, 10):
+            index = random.randint(0, 999)
+            val = self.l.get(index)
+            self.assertEqual(val, index*2)
+
+    def test_multi_item_remove(self):
+        for i in range(0, 1000):
+            self.l.append(i)
+        indices_to_remove = sorted(list({random.randint(0, 900) for i in range(0, 10)}))
+        for i in indices_to_remove:
+            self.l.remove(i)
+        number_of_values = 1000 - len(indices_to_remove)
+        for i in range(0, 100):
+            index = random.randint(0, number_of_values-1)
+            value = self.l.get(index)
+            expected = index + len([j for j in indices_to_remove if j <= index])
+            self.assertEqual(value, expected)
 
 
 class TestQueue(unittest.TestCase):
