@@ -14,13 +14,13 @@ class BinaryTree:
         self.root = None
 
     def _get_min_child_node_from_node(self, node):
-        """ Returns the minimum values node which is a child of node """
+        """ Returns the minimum values node which is a child of node. Called by delete() """
         while not(node.l is None):
             node = node.l
         return node
 
     def _transplant(self, t, r):
-        """ Replaces subtree rooted at t with that rooted at r """
+        """ Replaces subtree rooted at t with that rooted at r. Called by delete() """
         if t.p is None:
             self.root = r
         elif t == t.p.l:
