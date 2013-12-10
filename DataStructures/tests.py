@@ -5,6 +5,7 @@ import dequeue
 import stack
 import unittest
 import random
+import vEB_tree
 
 
 class TestBinarySearchTree(unittest.TestCase):
@@ -292,6 +293,94 @@ class TestStack(unittest.TestCase):
             self.s.push(i)
         for i in range(99, -101, -1):
             self.assertEqual(self.s.pop(), i)
+
+
+class TestvEB(unittest.TestCase):
+    def setUp(self):
+        self.v = vEB_tree.vEBTree(2)
+
+    def test_single_item_minimum(self):
+        value = random.randint(0, 15)
+        self.v.insert(value)
+        self.assertEqual(self.v.minimum(), value)
+
+    def test_multiple_item_minimum(self):
+        values = {random.randint(0, 15) for i in range(0, 6)}
+        for v in values:
+            self.v.insert(v)
+        self.assertEqual(self.v.minimum(), min(values))
+
+    def test_single_item_maximum(self):
+        value = random.randint(0, 15)
+        self.v.insert(value)
+        self.assertEqual(self.v.maximum(), value)
+
+    def test_multiple_item_maximum(self):
+        values = {random.randint(0, 15) for i in range(0, 6)}
+        for v in values:
+            self.v.insert(v)
+        self.assertEqual(self.v.maximum(), max(values))
+
+    def test_single_item_member(self):
+        value = random.randint(0, 15)
+        self.v.insert(value)
+        for i in range(0, 16):
+            if i == value:
+                self.assertTrue(self.v.member(i))
+            else:
+                self.assertFalse((self.v.member(i)))
+
+    def test_multiple_item_member(self):
+        values = {random.randint(0, 15) for i in range(0, 6)}
+        for v in values:
+            self.v.insert(v)
+        for i in range(0, 16):
+            if i in values:
+                self.assertTrue(self.v.member(i))
+            else:
+                self.assertFalse(self.v.member(i))
+
+    def test_all_item_member(self):
+        for i in range(0, 16):
+            self.v.insert(i)
+        for i in range(0, 16):
+            self.assertTrue(self.v.member(i))
+
+    def test_successor(self):
+        values = []
+        while len(values) < 2:
+            values = sorted(list({random.randint(0, 15) for i in range(0, 6)}))
+        for v in values:
+            self.v.insert(v)
+        index = random.randint(0, len(values)-2)
+        self.assertEqual(self.v.successor(values[index]), values[index + 1])
+
+    def test_predecessor(self):
+        values = []
+        while len(values) < 2:
+            values = sorted(list({random.randint(0, 15) for i in range(0, 6)}))
+        for v in values:
+            self.v.insert(v)
+        index = random.randint(1, len(values)-1)
+        self.assertEqual(self.v.predecessor(values[index]), values[index - 1])
+
+    def test_single_item_delete(self):
+        value = random.randint(0, 15)
+        self.v.insert(value)
+        self.v.delete(value)
+        self.assertFalse(self.v.member(value))
+
+    def test_multiple_item_delete(self):
+        for i in range(0, 16):
+            self.v.insert(i)
+        values_to_delete = {random.randint(0, 15) for i in range(0, 6)}
+        for v in values_to_delete:
+            self.v.delete(v)
+        for i in range(0, 16):
+            if i in values_to_delete:
+                self.assertFalse(self.v.member(i))
+            else:
+                self.assertTrue(self.v.member(i))
 
 
 if __name__ == 'main':
