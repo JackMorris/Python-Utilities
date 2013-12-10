@@ -1,8 +1,59 @@
+import binary_tree
 import linked_list
 import dequeue
 import stack
 import unittest
 import random
+
+
+class TestBinaryTree(unittest.TestCase):
+    def setUp(self):
+        self.b = binary_tree.BinaryTree()
+
+    def test_empty_tree_contains_false(self):
+        self.assertFalse(self.b.contains(random.randint(-1000000, 1000000)))
+
+    def test_single_item_contains(self):
+        value = random.randint(-1000000, 1000000)
+        self.b.add(value)
+        self.assertTrue(self.b.contains(value))
+
+    def test_single_item_contains_false(self):
+        value = random.randint(-100, 100)
+        self.b.add(value)
+        for i in range(-100, 101):
+            self.assertFalse(self.b.contains(i) and i != value)
+
+    def test_single_item_delete(self):
+        self.b.add(10)
+        self.b.delete(10)
+        self.assertFalse(self.b.contains(10))
+
+    def test_multiple_item_contains(self):
+        for i in range(-100, 100):
+            self.b.add(i)
+        for i in range(-100, 100):
+            self.assertTrue(self.b.contains(i))
+
+    def test_multiple_item_contains_false(self):
+        for i in range(-100, 100):
+            self.b.add(i)
+        for i in range(-500, -100):
+            self.assertFalse(self.b.contains(i))
+        for i in range(100, 500):
+            self.assertFalse(self.b.contains(i))
+
+    def test_multiple_item_delete(self):
+        for i in range(-100, 100):
+            self.b.add(i)
+        values_to_remove = sorted(list({random.randint(-100, 100) for i in range(0, 50)}))
+        for v in values_to_remove:
+            self.b.delete(v)
+        for i in range(-100, 100):
+            if i in values_to_remove:
+                self.assertFalse(self.b.contains(i))
+            else:
+                self.assertTrue(self.b.contains(i))
 
 
 class TestLinkedList(unittest.TestCase):
