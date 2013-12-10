@@ -71,7 +71,7 @@ class LinkedList:
         item = self._get_item_at_index(index)
         item.v = x
 
-    def remove(self, index):
+    def delete(self, index):
         """ Removes the value at index. Complexity: O(n) """
         if self.head is None:
             raise IndexError("index out of bounds")

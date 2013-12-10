@@ -46,11 +46,11 @@ class TestBinaryTree(unittest.TestCase):
     def test_multiple_item_delete(self):
         for i in range(-100, 100):
             self.b.add(i)
-        values_to_remove = sorted(list({random.randint(-100, 100) for i in range(0, 50)}))
-        for v in values_to_remove:
+        values_to_delete = sorted(list({random.randint(-100, 100) for i in range(0, 50)}))
+        for v in values_to_delete:
             self.b.delete(v)
         for i in range(-100, 100):
-            if i in values_to_remove:
+            if i in values_to_delete:
                 self.assertFalse(self.b.contains(i))
             else:
                 self.assertTrue(self.b.contains(i))
@@ -83,9 +83,9 @@ class TestLinkedList(unittest.TestCase):
         ret_value = self.l.get(0)
         self.assertEqual(value, ret_value)
 
-    def test_single_item_remove_empty(self):
+    def test_single_item_delete_empty(self):
         self.l.append(random.randint(-1000000, 1000000))
-        self.l.remove(0)
+        self.l.delete(0)
         self.assertTrue(self.l.is_empty())
 
     def test_multi_item_contains(self):
@@ -120,17 +120,17 @@ class TestLinkedList(unittest.TestCase):
             val = self.l.get(index)
             self.assertEqual(val, index*2)
 
-    def test_multi_item_remove(self):
+    def test_multi_item_delete(self):
         for i in range(0, 1000):
             self.l.append(i)
-        indices_to_remove = sorted(list({random.randint(0, 900) for i in range(0, 10)}))
-        for i in indices_to_remove:
-            self.l.remove(i)
-        number_of_values = 1000 - len(indices_to_remove)
+        indices_to_delete = sorted(list({random.randint(0, 900) for i in range(0, 10)}))
+        for i in indices_to_delete:
+            self.l.delete(i)
+        number_of_values = 1000 - len(indices_to_delete)
         for i in range(0, 100):
             index = random.randint(0, number_of_values-1)
             value = self.l.get(index)
-            expected = index + len([j for j in indices_to_remove if j <= index])
+            expected = index + len([j for j in indices_to_delete if j <= index])
             self.assertEqual(value, expected)
 
 
