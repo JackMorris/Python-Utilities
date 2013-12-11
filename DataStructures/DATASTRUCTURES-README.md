@@ -1,6 +1,19 @@
-Data Structures
+/DataStructures
 ===============
 
-Each module contains an implementation of a common data structure, usually encapsulated in a class. They are all self documenting.
+Each module contains a class implementing a data strucutre indicated by the name of the module. The usage of each implementation is specific to that implementation, and hence each one contains documentation regarding its usage.
 
-**Note:** Almost all of the implementations here are more suited to a lower level language, and some replicate functionality that already exists in the Python standard library. They mainly exist for educational purposes, although all can be used in functioning systems if you wish.
+What's Included (so far)
+========================
+
+* Binary Search tree
+* Binary tree
+* Double-ended queue
+* Linked list
+* Stack
+* Van Emde Boas tree
+    
+Tests
+=====
+
+Unit tests for all of the data structures are included in `tests.py`, implemented using the standard Python unittest framework.
