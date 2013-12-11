@@ -5,7 +5,7 @@ Organisation
 
 The repository is organised into directories denoting the content, eg. `Sorting/` for sorting algorithms. These directories contain modules for each script/algorithm implementation, as well as two key files:
 
-* `<DIRECOTRY>-README.md` - short readme file containing further information regarding what's in the directory
+* `<DIRECTORY>-README.md` - short readme file containing further information regarding what's in the directory
 * `tests.py` - unit tests for the modules in the directory
 
 Contributing
