@@ -265,13 +265,13 @@ class TestLinkedList(unittest.TestCase):
         self.l.add(random.randint(-1000000, 1000000), 0)
         self.assertFalse(self.l.is_empty())
 
-    def test_single_item_append_value(self):
+    def test_single_item_append(self):
         value = random.randint(-1000000, 1000000)
         self.l.append(value)
         ret_value = self.l.get(0)
         self.assertEqual(value, ret_value)
 
-    def test_single_item_add_value(self):
+    def test_single_item_add(self):
         value = random.randint(-1000000, 1000000)
         self.l.add(value, 0)
         ret_value = self.l.get(0)
@@ -298,34 +298,29 @@ class TestLinkedList(unittest.TestCase):
 
     def test_multi_item_get(self):
         for i in range(0, 1000):
-            self.l.append(i**2)
-        for i in range(0, 10):
-            index = random.randint(0, 999)
-            val = self.l.get(index)
-            self.assertEqual(val, index**2)
+            self.l.append(i)
+        for i in range(0, 1000):
+            self.assertEqual(self.l.get(i), i)
 
     def test_multi_item_set(self):
         for i in range(0, 1000):
-            self.l.append(1)
+            self.l.append(-1)
         for i in range(0, 1000):
-            self.l.set(i*2, i)
-        for i in range(0, 10):
-            index = random.randint(0, 999)
-            val = self.l.get(index)
-            self.assertEqual(val, index*2)
+            self.l.set(i, i)
+        for i in range(0, 1000):
+            self.assertEqual(self.l.get(i), i)
 
     def test_multi_item_delete(self):
         for i in range(0, 1000):
             self.l.append(i)
-        indices_to_delete = sorted(list({random.randint(0, 900) for i in range(0, 10)}))
+        indices_to_delete = sorted(list({random.randint(0, 999) for i in range(0, 50)}), reverse=True)
         for i in indices_to_delete:
             self.l.delete(i)
-        number_of_values = 1000 - len(indices_to_delete)
-        for i in range(0, 100):
-            index = random.randint(0, number_of_values-1)
-            value = self.l.get(index)
-            expected = index + len([j for j in indices_to_delete if j <= index])
-            self.assertEqual(value, expected)
+        for i in range(0, 1000):
+            if i in indices_to_delete:
+                self.assertFalse(self.l.contains(i))
+            else:
+                self.assertTrue(self.l.contains(i))
 
 
 class TestQueue(unittest.TestCase):
