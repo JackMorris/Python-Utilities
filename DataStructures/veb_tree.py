@@ -39,12 +39,12 @@ class vEBTree:
 
     def successor(self, x):
         """ Return the successor to x from the tree. Complexity: O(k) """
-        if self.u == 2:
+        if self.min is None:
+            return None
+        elif self.u == 2:
             if x == 0 and self.max == 1:
                 return 1
-            else:
-                return None
-        elif not(self.min is None) and x < self.min:
+        elif x < self.min:
             return self.min
         else:
             high_x = self._high(x)
@@ -62,12 +62,12 @@ class vEBTree:
 
     def predecessor(self, x):
         """ Return the predecessor to x from the tree. Complexity: O(k) """
-        if self.u == 2:
+        if self.min is None:
+            return None
+        elif self.u == 2:
             if x == 1 and self.min == 0:
                 return 0
-            else:
-                return None
-        elif not(self.max is None) and x > self.max:
+        elif x > self.max:
             return self.max
         else:
             high_x = self._high(x)
