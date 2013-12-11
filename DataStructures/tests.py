@@ -1,7 +1,7 @@
 import binary_search_tree
 import binary_tree
 import linked_list
-import dequeue
+import queue
 import stack
 import unittest
 import random
@@ -325,7 +325,7 @@ class TestLinkedList(unittest.TestCase):
 
 class TestQueue(unittest.TestCase):
     def setUp(self):
-        self.q = dequeue.DeQueue()
+        self.q = queue.Queue()
 
     def test_empty_queue(self):
         self.assertTrue(self.q.is_empty())
