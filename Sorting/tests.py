@@ -24,20 +24,15 @@ class BubbleSort(unittest.TestCase):
         self.assertEqual(data, [])
 
     def test_single_input(self):
-        data = [random.randint(-1000000, 1000000)]
+        data = rand_list(count=1)
         data_cp = data[:]
         bubble_sort(data)
         self.assertEqual(data, data_cp)
 
     def test_double_input(self):
-        data = [random.randint(-1000000, 1000000), random.randint(-1000000, 1000000)]
-        data_correct = data[:]
-        if data_correct[0] > data_correct[1]:
-            tmp = data_correct[0]
-            data_correct[0] = data_correct[1]
-            data_correct[1] = tmp
+        data = rand_list(count=2)
         bubble_sort(data)
-        self.assertEqual(data, data_correct)
+        self.assertLessEqual(data[0], data[1])
 
     def test_array_input(self):
         data = rand_list()
@@ -53,20 +48,15 @@ class CountingSort(unittest.TestCase):
         self.assertEqual(data, [])
 
     def test_single_input(self):
-        data = [random.randint(-1000000, 1000000)]
+        data = rand_list(count=1)
         data_cp = data[:]
         counting_sort(data)
         self.assertEqual(data, data_cp)
 
     def test_double_input(self):
-        data = [random.randint(-1000000, 1000000), random.randint(-1000000, 1000000)]
-        data_correct = data[:]
-        if data_correct[0] > data_correct[1]:
-            tmp = data_correct[0]
-            data_correct[0] = data_correct[1]
-            data_correct[1] = tmp
+        data = rand_list(count=2)
         counting_sort(data)
-        self.assertEqual(data, data_correct)
+        self.assertLessEqual(data[0], data[1])
 
     def test_array_input(self):
         data = rand_list()
@@ -82,20 +72,15 @@ class HeapSort(unittest.TestCase):
         self.assertEqual(data, [])
 
     def test_single_input(self):
-        data = [random.randint(-1000000, 1000000)]
+        data = rand_list(count=1)
         data_cp = data[:]
         heap_sort(data)
         self.assertEqual(data, data_cp)
 
     def test_double_input(self):
-        data = [random.randint(-1000000, 1000000), random.randint(-1000000, 1000000)]
-        data_correct = data[:]
-        if data_correct[0] > data_correct[1]:
-            tmp = data_correct[0]
-            data_correct[0] = data_correct[1]
-            data_correct[1] = tmp
+        data = rand_list(count=2)
         heap_sort(data)
-        self.assertEqual(data, data_correct)
+        self.assertLessEqual(data[0], data[1])
 
     def test_array_input(self):
         data = rand_list()
@@ -111,20 +96,15 @@ class InsertionSort(unittest.TestCase):
         self.assertEqual(data, [])
 
     def test_single_input(self):
-        data = [random.randint(-1000000, 1000000)]
+        data = rand_list(count=1)
         data_cp = data[:]
         insertion_sort(data)
         self.assertEqual(data, data_cp)
 
     def test_double_input(self):
-        data = [random.randint(-1000000, 1000000), random.randint(-1000000, 1000000)]
-        data_correct = data[:]
-        if data_correct[0] > data_correct[1]:
-            tmp = data_correct[0]
-            data_correct[0] = data_correct[1]
-            data_correct[1] = tmp
+        data = rand_list(count=2)
         insertion_sort(data)
-        self.assertEqual(data, data_correct)
+        self.assertLessEqual(data[0], data[1])
 
     def test_array_input(self):
         data = rand_list()
@@ -140,20 +120,15 @@ class MergeSort(unittest.TestCase):
         self.assertEqual(data, [])
 
     def test_single_input(self):
-        data = [random.randint(-1000000, 1000000)]
+        data = rand_list(count=1)
         data_cp = data[:]
         merge_sort(data)
         self.assertEqual(data, data_cp)
 
     def test_double_input(self):
-        data = [random.randint(-1000000, 1000000), random.randint(-1000000, 1000000)]
-        data_correct = data[:]
-        if data_correct[0] > data_correct[1]:
-            tmp = data_correct[0]
-            data_correct[0] = data_correct[1]
-            data_correct[1] = tmp
+        data = rand_list(count=2)
         merge_sort(data)
-        self.assertEqual(data, data_correct)
+        self.assertLessEqual(data[0], data[1])
 
     def test_array_input(self):
         data = rand_list()
@@ -169,20 +144,15 @@ class Quicksort(unittest.TestCase):
         self.assertEqual(data, [])
 
     def test_single_input(self):
-        data = [random.randint(-1000000, 1000000)]
+        data = rand_list(count=1)
         data_cp = data[:]
         quicksort(data)
         self.assertEqual(data, data_cp)
 
     def test_double_input(self):
-        data = [random.randint(-1000000, 1000000), random.randint(-1000000, 1000000)]
-        data_correct = data[:]
-        if data_correct[0] > data_correct[1]:
-            tmp = data_correct[0]
-            data_correct[0] = data_correct[1]
-            data_correct[1] = tmp
+        data = rand_list(count=2)
         quicksort(data)
-        self.assertEqual(data, data_correct)
+        self.assertLessEqual(data[0], data[1])
 
     def test_array_input(self):
         data = rand_list()
@@ -198,20 +168,15 @@ class RadixSort(unittest.TestCase):
         self.assertEqual(data, [])
 
     def test_single_input(self):
-        data = [random.randint(0, 1000000)]
+        data = rand_list(min_val=0, count=1)
         data_cp = data[:]
         radix_sort(data)
         self.assertEqual(data, data_cp)
 
     def test_double_input(self):
-        data = [random.randint(0, 1000000), random.randint(0, 1000000)]
-        data_correct = data[:]
-        if data_correct[0] > data_correct[1]:
-            tmp = data_correct[0]
-            data_correct[0] = data_correct[1]
-            data_correct[1] = tmp
+        data = rand_list(min_val=0, count=2)
         radix_sort(data)
-        self.assertEqual(data, data_correct)
+        self.assertLessEqual(data[0], data[1])
 
     def test_array_input(self):
         data = rand_list(min_val=0)
@@ -227,20 +192,15 @@ class SelectionSort(unittest.TestCase):
         self.assertEqual(data, [])
 
     def test_single_input(self):
-        data = [random.randint(-1000000, 1000000)]
+        data = rand_list(count=1)
         data_cp = data[:]
         selection_sort(data)
         self.assertEqual(data, data_cp)
 
     def test_double_input(self):
-        data = [random.randint(-1000000, 1000000), random.randint(-1000000, 1000000)]
-        data_correct = data[:]
-        if data_correct[0] > data_correct[1]:
-            tmp = data_correct[0]
-            data_correct[0] = data_correct[1]
-            data_correct[1] = tmp
+        data = rand_list(count=2)
         selection_sort(data)
-        self.assertEqual(data, data_correct)
+        self.assertLessEqual(data[0], data[1])
 
     def test_array_input(self):
         data = rand_list()
