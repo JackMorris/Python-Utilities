@@ -8,8 +8,8 @@ What's Included (so far)
 
 * Binary Search tree
 * Binary tree
-* Queue
 * Linked list
+* Queue
 * Stack
 * Van Emde Boas tree
     
