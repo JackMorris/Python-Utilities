@@ -24,7 +24,40 @@ class TestBinarySearchTree(unittest.TestCase):
         key = random.randint(-100, 100)
         self.bst.set(key, 0)
         for i in range(-100, 101):
-            self.assertFalse(self.bst.contains(i) and i != key)
+            if i != key:
+                self.assertFalse(self.bst.contains(i))
+
+    def test_multiple_item_contains(self):
+        for i in range(-100, 100):
+            self.bst.set(i, 0)
+        for i in range(-100, 100):
+            self.assertTrue(self.bst.contains(i))
+
+    def test_multiple_item_contains_false(self):
+        for i in range(-100, 100):
+            self.bst.set(i, 0)
+        for i in range(-500, -100):
+            self.assertFalse(self.bst.contains(i))
+        for i in range(100, 500):
+            self.assertFalse(self.bst.contains(i))
+
+    def test_multiple_item_contains_shuffle(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bst.set(i, 0)
+        for i in range(-100, 100):
+            self.assertTrue(self.bst.contains(i))
+
+    def test_multiple_item_contains_false_shuffle(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bst.set(i, 0)
+        for i in range(-500, -100):
+            self.assertFalse(self.bst.contains(i))
+        for i in range(100, 500):
+            self.assertFalse(self.bst.contains(i))
 
     def test_single_item_get(self):
         key = random.randint(-100, 100)
@@ -34,9 +67,17 @@ class TestBinarySearchTree(unittest.TestCase):
 
     def test_multiple_item_get(self):
         for i in range(-100, 100):
-            self.bst.set(i, i*2)
+            self.bst.set(i, i)
         for i in range(-100, 100):
-            self.assertEqual(i*2, self.bst.get(i))
+            self.assertEqual(i, self.bst.get(i))
+
+    def test_multiple_item_get_shuffle(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bst.set(i, i)
+        for i in range(-100, 100):
+            self.assertEqual(i, self.bst.get(i))
 
     def test_single_item_set(self):
         key = random.randint(-100, 100)
@@ -53,29 +94,26 @@ class TestBinarySearchTree(unittest.TestCase):
         for i in range(-100, 100):
             self.assertEqual(self.bst.get(i), i**2)
 
+    def test_multiple_item_set_shuffle(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bst.set(i, -1)
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bst.set(i, i**2)
+        for i in range(-100, 100):
+            self.assertEqual(self.bst.get(i), i**2)
+
     def test_single_item_delete(self):
         self.bst.set(10, 0)
         self.bst.delete(10)
         self.assertFalse(self.bst.contains(10))
 
-    def test_multiple_item_contains(self):
-        for i in range(-100, 100):
-            self.bst.set(i, 0)
-        for i in range(-100, 100):
-            self.assertTrue(self.bst.contains(i))
-
-    def test_multiple_item_contains_false(self):
-        for i in range(-100, 100):
-            self.bst.set(i, 0)
-        for i in range(-500, -100):
-            self.assertFalse(self.bst.contains(i))
-        for i in range(100, 500):
-            self.assertFalse(self.bst.contains(i))
-
     def test_multiple_item_delete(self):
         for i in range(-100, 100):
             self.bst.set(i, 0)
-        values_to_delete = sorted(list({random.randint(-100, 99) for i in range(0, 50)}))
+        values_to_delete = {random.randint(-100, 99) for i in range(0, 50)}
         for v in values_to_delete:
             self.bst.delete(v)
         for i in range(-100, 100):
@@ -84,55 +122,132 @@ class TestBinarySearchTree(unittest.TestCase):
             else:
                 self.assertTrue(self.bst.contains(i))
 
+    def test_single_root_delete(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bst.set(i, 0)
+        self.bst.delete(-100)
+        self.assertFalse(self.bst.contains(-100))
+        for i in range(-99, 100):
+            self.assertTrue(self.bst.contains(i))
+
+    def test_multiple_root_delete(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bst.set(i, 0)
+        for i in range(-100, 100):
+            self.bst.delete(i)
+            self.assertFalse(self.bst.contains(i))
+            for j in range(i+1, 100):
+                self.assertTrue(self.bst.contains(j))
+
+    def test_all_items_delete(self):
+        for i in range(-100, 100):
+            self.bst.set(i, 0)
+        for i in range(-100, 100):
+            self.bst.delete(i)
+        for i in range(-100, 100):
+            self.assertFalse(self.bst.contains(i))
+
 
 class TestBinaryTree(unittest.TestCase):
     def setUp(self):
-        self.b = binary_tree.BinaryTree()
+        self.bt = binary_tree.BinaryTree()
 
     def test_empty_tree_contains_false(self):
-        self.assertFalse(self.b.contains(random.randint(-1000000, 1000000)))
+        self.assertFalse(self.bt.contains(random.randint(-1000000, 1000000)))
 
     def test_single_item_contains(self):
-        value = random.randint(-1000000, 1000000)
-        self.b.add(value)
-        self.assertTrue(self.b.contains(value))
+        val = random.randint(-1000000, 1000000)
+        self.bt.add(val)
+        self.assertTrue(self.bt.contains(val))
 
     def test_single_item_contains_false(self):
-        value = random.randint(-100, 100)
-        self.b.add(value)
+        val = random.randint(-100, 100)
+        self.bt.add(val)
         for i in range(-100, 101):
-            self.assertFalse(self.b.contains(i) and i != value)
-
-    def test_single_item_delete(self):
-        self.b.add(10)
-        self.b.delete(10)
-        self.assertFalse(self.b.contains(10))
+            if i != val:
+                self.assertFalse(self.bt.contains(i))
 
     def test_multiple_item_contains(self):
         for i in range(-100, 100):
-            self.b.add(i)
+            self.bt.add(i)
         for i in range(-100, 100):
-            self.assertTrue(self.b.contains(i))
+            self.assertTrue(self.bt.contains(i))
 
     def test_multiple_item_contains_false(self):
         for i in range(-100, 100):
-            self.b.add(i)
+            self.bt.add(i)
         for i in range(-500, -100):
-            self.assertFalse(self.b.contains(i))
+            self.assertFalse(self.bt.contains(i))
         for i in range(100, 500):
-            self.assertFalse(self.b.contains(i))
+            self.assertFalse(self.bt.contains(i))
+
+    def test_multiple_item_contains_shuffle(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bt.add(i)
+        for i in range(-100, 100):
+            self.assertTrue(self.bt.contains(i))
+
+    def test_multiple_item_contains_false_shuffle(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bt.add(i)
+        for i in range(-500, -100):
+            self.assertFalse(self.bt.contains(i))
+        for i in range(100, 500):
+            self.assertFalse(self.bt.contains(i))
+
+    def test_single_item_delete(self):
+        self.bt.add(10)
+        self.bt.delete(10)
+        self.assertFalse(self.bt.contains(10))
 
     def test_multiple_item_delete(self):
         for i in range(-100, 100):
-            self.b.add(i)
-        values_to_delete = sorted(list({random.randint(-100, 99) for i in range(0, 50)}))
+            self.bt.add(i)
+        values_to_delete = {random.randint(-100, 99) for i in range(0, 50)}
         for v in values_to_delete:
-            self.b.delete(v)
+            self.bt.delete(v)
         for i in range(-100, 100):
             if i in values_to_delete:
-                self.assertFalse(self.b.contains(i))
+                self.assertFalse(self.bt.contains(i))
             else:
-                self.assertTrue(self.b.contains(i))
+                self.assertTrue(self.bt.contains(i))
+
+    def test_single_root_delete(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bt.add(i)
+        self.bt.delete(-100)
+        self.assertFalse(self.bt.contains(-100))
+        for i in range(-99, 100):
+            self.assertTrue(self.bt.contains(i))
+
+    def test_multiple_root_delete(self):
+        shuffled_range = list(range(-100, 100))
+        random.shuffle(shuffled_range)
+        for i in shuffled_range:
+            self.bt.add(i)
+        for i in range(-100, 100):
+            self.bt.delete(i)
+            self.assertFalse(self.bt.contains(i))
+            for j in range(i+1, 100):
+                self.assertTrue(self.bt.contains(j))
+
+    def test_all_items_delete(self):
+        for i in range(-100, 100):
+            self.bt.add(i)
+        for i in range(-100, 100):
+            self.bt.delete(i)
+        for i in range(-100, 100):
+            self.assertFalse(self.bt.contains(i))
 
 
 class TestLinkedList(unittest.TestCase):
