@@ -2,17 +2,13 @@ class vEBTree:
     """ Implementation of a van Emde Boas Tree; an efficient priority queue for when the key universe size is known """
 
     def __init__(self, k):
-        """ Initialises an empty vEB tree, u = 2**2**k. Time/space complexity: O(2**2**k). """
+        """ Initialises an empty vEB tree, u = 2**2**k. Complexity: O(1) """
         self.k = k
         self.u = 2**2**k
         self.min = None
         self.max = None
         self.summary = None
         self.cluster = []
-        if k > 0:
-            self.summary = vEBTree(k-1)
-            for i in range(0, 2**2**(k-1)):
-                self.cluster.append(vEBTree(k-1))
 
     def _high(self, x):
         return int(x/(2**2**(self.k-1)))
@@ -35,7 +31,7 @@ class vEBTree:
         """ Returns true if x is a member of the tree, False otherwise. Complexity: O(k) """
         if x == self.min or x == self.max:
             return True
-        elif self.u == 2:
+        elif self.u == 2 or self.min is None:
             return False
         else:
             cluster_tree = self.cluster[self._high(x)]
@@ -95,6 +91,10 @@ class vEBTree:
         if self.min is None:
             self.min = x
             self.max = x
+            if self.k > 0:
+                self.summary = vEBTree(self.k-1)
+                for i in range(0, 2**2**(self.k-1)):
+                    self.cluster.append(vEBTree(self.k-1))
         else:
             if x < self.min:
                 tmp = x
@@ -103,10 +103,7 @@ class vEBTree:
             if self.u > 2:
                 if (self.cluster[self._high(x)]).minimum() is None:
                     self.summary.insert(self._high(x))
-                    self.cluster[self._high(x)].min = self._low(x)
-                    self.cluster[self._high(x)].max = self._low(x)
-                else:
-                    (self.cluster[self._high(x)]).insert(self._low(x))
+                (self.cluster[self._high(x)]).insert(self._low(x))
             if x > self.max:
                 self.max = x
 
@@ -116,6 +113,8 @@ class vEBTree:
         if self.min == self.max:
             self.min = None
             self.max = None
+            self.cluster = []
+            self.summary = None
         elif self.u == 2:
             if x == 0:
                 self.min = 1
