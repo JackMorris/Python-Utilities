@@ -16,12 +16,10 @@ def counting_sort(data):
         count_index = data[i]-min_value
         count_list[count_index] += 1
 
-    count_value = max_value
-    data_index = len(data) - 1
-    while data_index >= 0:
-        if count_list[count_value-min_value] == 0:
-            count_value -= 1
-        else:
-            data[data_index] = count_value
-            count_list[count_value-min_value] -= 1
-            data_index -= 1
+    # Traverse both data and count_list, updating values in data as appropriate
+    count_index = 0
+    for i in range(0, len(data)):
+        while count_list[count_index] == 0:
+            count_index += 1
+        data[i] = count_index + min_value
+        count_list[count_index] -= 1
