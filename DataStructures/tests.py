@@ -297,7 +297,7 @@ class TestStack(unittest.TestCase):
 
 class TestvEB(unittest.TestCase):
     def setUp(self):
-        self.v = vEB_tree.vEBTree(2)
+        self.v = veb_tree.vEBTree(2)
 
     def test_single_item_minimum(self):
         value = random.randint(0, 15)
