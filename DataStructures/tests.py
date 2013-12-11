@@ -375,21 +375,15 @@ class TestStack(unittest.TestCase):
         self.s.push(random.randint(-1000000, 1000000))
         self.assertFalse(self.s.is_empty())
 
+    def test_multi_item_non_empty(self):
+        for i in range(0, 10):
+            self.s.push(random.randint(-1000000, 1000000))
+        self.assertFalse(self.s.is_empty())
+
     def test_single_item_push_pop_empty(self):
         self.s.push(random.randint(-1000000, 1000000))
         self.s.pop()
         self.assertTrue(self.s.is_empty())
-
-    def test_single_item_push_pop_value(self):
-        value = random.randint(-1000000, 1000000)
-        self.s.push(value)
-        pop_value = self.s.pop()
-        self.assertEqual(value, pop_value)
-
-    def test_multi_item_push_pop_non_empty(self):
-        for i in range(0, random.randint(10,100)):
-            self.s.push(random.randint(-1000000, 1000000))
-        self.assertFalse(self.s.is_empty())
 
     def test_multi_item_push_pop_empty(self):
         for i in range(0, 1000):
@@ -398,11 +392,30 @@ class TestStack(unittest.TestCase):
             self.s.pop()
         self.assertTrue(self.s.is_empty())
 
-    def test_multi_item_push_pop_value(self):
+    def test_single_item_push_pop(self):
+        value = random.randint(-1000000, 1000000)
+        self.s.push(value)
+        pop_value = self.s.pop()
+        self.assertEqual(value, pop_value)
+
+    def test_multi_item_push_pop(self):
         for i in range(-100, 100):
             self.s.push(i)
         for i in range(99, -101, -1):
             self.assertEqual(self.s.pop(), i)
+
+    def test_multi_item_push_pop_all_same(self):
+        value = random.randint(-100, 100)
+        for i in range(0, 100):
+            self.s.push(value)
+        for i in range(0, 100):
+            self.assertEqual(self.s.pop(), value)
+
+    def test_multi_item_push_pop_all_zero(self):
+        for i in range(0, 100):
+            self.s.push(0)
+        for i in range(0, 100):
+            self.assertEqual(self.s.pop(), 0)
 
 
 class TestvEB(unittest.TestCase):
