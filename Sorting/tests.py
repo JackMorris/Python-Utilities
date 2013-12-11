@@ -17,7 +17,7 @@ def rand_list(count=100, min_val=-1000000, max_val=1000000):
     return result_list
 
 
-class BubbleSort(unittest.TestCase):
+class TestBubbleSort(unittest.TestCase):
     def test_zero_input(self):
         data = []
         bubble_sort(data)
@@ -41,7 +41,7 @@ class BubbleSort(unittest.TestCase):
             self.assertLessEqual(data[i-1], data[i])
 
 
-class CountingSort(unittest.TestCase):
+class TestCountingSort(unittest.TestCase):
     def test_zero_input(self):
         data = []
         counting_sort(data)
@@ -65,7 +65,7 @@ class CountingSort(unittest.TestCase):
             self.assertLessEqual(data[i-1], data[i])
 
 
-class HeapSort(unittest.TestCase):
+class TestHeapSort(unittest.TestCase):
     def test_zero_input(self):
         data = []
         heap_sort(data)
@@ -89,7 +89,7 @@ class HeapSort(unittest.TestCase):
             self.assertLessEqual(data[i-1], data[i])
 
 
-class InsertionSort(unittest.TestCase):
+class TestInsertionSort(unittest.TestCase):
     def test_zero_input(self):
         data = []
         insertion_sort(data)
@@ -113,7 +113,7 @@ class InsertionSort(unittest.TestCase):
             self.assertLessEqual(data[i-1], data[i])
 
 
-class MergeSort(unittest.TestCase):
+class TestMergeSort(unittest.TestCase):
     def test_zero_input(self):
         data = []
         merge_sort(data)
@@ -137,7 +137,7 @@ class MergeSort(unittest.TestCase):
             self.assertLessEqual(data[i-1], data[i])
 
 
-class Quicksort(unittest.TestCase):
+class TestQuicksort(unittest.TestCase):
     def test_zero_input(self):
         data = []
         quicksort(data)
@@ -161,7 +161,7 @@ class Quicksort(unittest.TestCase):
             self.assertLessEqual(data[i-1], data[i])
 
 
-class RadixSort(unittest.TestCase):
+class TestRadixSort(unittest.TestCase):
     def test_zero_input(self):
         data = []
         radix_sort(data)
@@ -185,7 +185,7 @@ class RadixSort(unittest.TestCase):
             self.assertLessEqual(data[i-1], data[i])
 
 
-class SelectionSort(unittest.TestCase):
+class TestSelectionSort(unittest.TestCase):
     def test_zero_input(self):
         data = []
         selection_sort(data)
