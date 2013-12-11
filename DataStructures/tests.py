@@ -215,7 +215,7 @@ class TestLinkedList(unittest.TestCase):
 
 class TestQueue(unittest.TestCase):
     def setUp(self):
-        self.q = dequeue.MyQueue()
+        self.q = dequeue.DeQueue()
 
     def test_empty_queue(self):
         self.assertTrue(self.q.is_empty())

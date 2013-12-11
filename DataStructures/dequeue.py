@@ -1,4 +1,4 @@
-class MyQueue:
+class DeQueue:
     """ Efficient implementation of a First-In, First-Out queue. """
 
     def __init__(self):
