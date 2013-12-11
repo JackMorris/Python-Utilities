@@ -40,6 +40,19 @@ class TestBubbleSort(unittest.TestCase):
         for i in range(1, len(data)):
             self.assertLessEqual(data[i-1], data[i])
 
+    def test_all_zero_input(self):
+        data = [0]*100
+        bubble_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(data[i], 0)
+
+    def test_all_same_input(self):
+        single_val = rand_list(count=1)[0]
+        data = [single_val]*100
+        bubble_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(single_val, data[i])
+
 
 class TestCountingSort(unittest.TestCase):
     def test_zero_input(self):
@@ -63,6 +76,19 @@ class TestCountingSort(unittest.TestCase):
         counting_sort(data)
         for i in range(1, len(data)):
             self.assertLessEqual(data[i-1], data[i])
+
+    def test_all_zero_input(self):
+        data = [0]*100
+        counting_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(data[i], 0)
+
+    def test_all_same_input(self):
+        single_val = rand_list(count=1)[0]
+        data = [single_val]*100
+        counting_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(single_val, data[i])
 
 
 class TestHeapSort(unittest.TestCase):
@@ -88,6 +114,19 @@ class TestHeapSort(unittest.TestCase):
         for i in range(1, len(data)):
             self.assertLessEqual(data[i-1], data[i])
 
+    def test_all_zero_input(self):
+        data = [0]*100
+        heap_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(data[i], 0)
+
+    def test_all_same_input(self):
+        single_val = rand_list(count=1)[0]
+        data = [single_val]*100
+        heap_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(single_val, data[i])
+
 
 class TestInsertionSort(unittest.TestCase):
     def test_zero_input(self):
@@ -111,6 +150,19 @@ class TestInsertionSort(unittest.TestCase):
         insertion_sort(data)
         for i in range(1, len(data)):
             self.assertLessEqual(data[i-1], data[i])
+
+    def test_all_zero_input(self):
+        data = [0]*100
+        insertion_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(data[i], 0)
+
+    def test_all_same_input(self):
+        single_val = rand_list(count=1)[0]
+        data = [single_val]*100
+        insertion_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(single_val, data[i])
 
 
 class TestMergeSort(unittest.TestCase):
@@ -136,6 +188,19 @@ class TestMergeSort(unittest.TestCase):
         for i in range(1, len(data)):
             self.assertLessEqual(data[i-1], data[i])
 
+    def test_all_zero_input(self):
+        data = [0]*100
+        merge_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(data[i], 0)
+
+    def test_all_same_input(self):
+        single_val = rand_list(count=1)[0]
+        data = [single_val]*100
+        merge_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(single_val, data[i])
+
 
 class TestQuicksort(unittest.TestCase):
     def test_zero_input(self):
@@ -159,6 +224,19 @@ class TestQuicksort(unittest.TestCase):
         quicksort(data)
         for i in range(1, len(data)):
             self.assertLessEqual(data[i-1], data[i])
+
+    def test_all_zero_input(self):
+        data = [0]*100
+        quicksort(data)
+        for i in range(0, 100):
+            self.assertEqual(data[i], 0)
+
+    def test_all_same_input(self):
+        single_val = rand_list(count=1)[0]
+        data = [single_val]*100
+        quicksort(data)
+        for i in range(0, 100):
+            self.assertEqual(single_val, data[i])
 
 
 class TestRadixSort(unittest.TestCase):
@@ -184,6 +262,19 @@ class TestRadixSort(unittest.TestCase):
         for i in range(1, len(data)):
             self.assertLessEqual(data[i-1], data[i])
 
+    def test_all_zero_input(self):
+        data = [0]*100
+        radix_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(data[i], 0)
+
+    def test_all_same_input(self):
+        single_val = rand_list(count=1, min_val=0)[0]
+        data = [single_val]*100
+        radix_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(single_val, data[i])
+
 
 class TestSelectionSort(unittest.TestCase):
     def test_zero_input(self):
@@ -207,6 +298,19 @@ class TestSelectionSort(unittest.TestCase):
         selection_sort(data)
         for i in range(1, len(data)):
             self.assertLessEqual(data[i-1], data[i])
+
+    def test_all_zero_input(self):
+        data = [0]*100
+        selection_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(data[i], 0)
+
+    def test_all_same_input(self):
+        single_val = rand_list(count=1)[0]
+        data = [single_val]*100
+        selection_sort(data)
+        for i in range(0, 100):
+            self.assertEqual(single_val, data[i])
 
 if __name__ == 'main':
     unittest.main()
