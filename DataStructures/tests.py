@@ -420,59 +420,53 @@ class TestStack(unittest.TestCase):
 
 class TestvEB(unittest.TestCase):
     def setUp(self):
-        self.v = veb_tree.vEBTree(2)
+        self.v = veb_tree.vEBTree(5)
 
     def test_single_item_minimum(self):
-        value = random.randint(0, 15)
+        value = random.randint(0, 10000)
         self.v.insert(value)
         self.assertEqual(self.v.minimum(), value)
 
     def test_multiple_item_minimum(self):
-        values = {random.randint(0, 15) for i in range(0, 6)}
+        values = {random.randint(0, 10000) for i in range(0, 10)}
         for v in values:
             self.v.insert(v)
         self.assertEqual(self.v.minimum(), min(values))
 
     def test_single_item_maximum(self):
-        value = random.randint(0, 15)
+        value = random.randint(0, 10000)
         self.v.insert(value)
         self.assertEqual(self.v.maximum(), value)
 
     def test_multiple_item_maximum(self):
-        values = {random.randint(0, 15) for i in range(0, 6)}
+        values = {random.randint(0, 10000) for i in range(0, 10)}
         for v in values:
             self.v.insert(v)
         self.assertEqual(self.v.maximum(), max(values))
 
     def test_single_item_member(self):
-        value = random.randint(0, 15)
+        value = random.randint(0, 100)
         self.v.insert(value)
-        for i in range(0, 16):
+        for i in range(0, 101):
             if i == value:
                 self.assertTrue(self.v.member(i))
             else:
                 self.assertFalse((self.v.member(i)))
 
     def test_multiple_item_member(self):
-        values = {random.randint(0, 15) for i in range(0, 6)}
+        values = {random.randint(0, 100) for i in range(0, 10)}
         for v in values:
             self.v.insert(v)
-        for i in range(0, 16):
+        for i in range(0, 101):
             if i in values:
                 self.assertTrue(self.v.member(i))
             else:
                 self.assertFalse(self.v.member(i))
 
-    def test_all_item_member(self):
-        for i in range(0, 16):
-            self.v.insert(i)
-        for i in range(0, 16):
-            self.assertTrue(self.v.member(i))
-
     def test_successor(self):
         values = []
         while len(values) < 2:
-            values = sorted(list({random.randint(0, 15) for i in range(0, 6)}))
+            values = sorted(list({random.randint(0, 10000) for i in range(0, 100)}))
         for v in values:
             self.v.insert(v)
         index = random.randint(0, len(values)-2)
@@ -481,29 +475,37 @@ class TestvEB(unittest.TestCase):
     def test_predecessor(self):
         values = []
         while len(values) < 2:
-            values = sorted(list({random.randint(0, 15) for i in range(0, 6)}))
+            values = sorted(list({random.randint(0, 10000) for i in range(0, 100)}))
         for v in values:
             self.v.insert(v)
         index = random.randint(1, len(values)-1)
         self.assertEqual(self.v.predecessor(values[index]), values[index - 1])
 
     def test_single_item_delete(self):
-        value = random.randint(0, 15)
+        value = random.randint(0, 10000)
         self.v.insert(value)
         self.v.delete(value)
         self.assertFalse(self.v.member(value))
 
     def test_multiple_item_delete(self):
-        for i in range(0, 16):
+        for i in range(0, 1000):
             self.v.insert(i)
-        values_to_delete = {random.randint(0, 15) for i in range(0, 6)}
+        values_to_delete = {random.randint(0, 999) for i in range(0, 100)}
         for v in values_to_delete:
             self.v.delete(v)
-        for i in range(0, 16):
+        for i in range(0, 1000):
             if i in values_to_delete:
                 self.assertFalse(self.v.member(i))
             else:
                 self.assertTrue(self.v.member(i))
+
+    def test_all_item_delete(self):
+        for i in range(0, 1000):
+            self.v.insert(i)
+        for i in range(0, 1000):
+            self.v.delete(i)
+        for i in range(0, 1000):
+            self.assertFalse(self.v.member(i))
 
 
 if __name__ == 'main':
