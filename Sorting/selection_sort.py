@@ -8,7 +8,7 @@ Space complexity: O(n) total, O(1) auxiliary (in place)
 
 
 def selection_sort(data):
-    for i in range(0, len(data)):
+    for i in range(0, len(data)-1):
         current_min_index = i
         for j in range(i+1, len(data)):
             if data[j] < data[current_min_index]:
