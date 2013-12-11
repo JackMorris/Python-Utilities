@@ -29,7 +29,7 @@ def _merge(data, start_index, split_index, end_index):
 
 
 def _merge_sort(data, start_index, end_index):
-    """ Called by merge_sort so the sort can be done using O(n) auxiliary space """
+    """ Called by merge_sort() so the sort can be done recursively, using O(n) auxiliary space """
     number_of_values = end_index-start_index
     if number_of_values <= 1:
         return

@@ -25,7 +25,7 @@ def _partition(data, start_index, end_index):
 
 
 def _quicksort(data, start_index, end_index):
-    """ Called by quicksort so the sort can be done in place """
+    """ Called by quicksort() so the sort can be done recursively in place """
     if start_index >= end_index:
         return
     partition_index = _partition(data, start_index, end_index)
