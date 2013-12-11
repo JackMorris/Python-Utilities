@@ -11,4 +11,4 @@ The repository is organised into directories denoting the content, eg. `Sorting/
 Contributing
 ============
 
-Pull requests welcome! Feel free to send any additions and/or modifications/corrections. All code is licensed under MIT, so don't hesitate in using any of the implementaions in your own projects.
+Pull requests welcome! Feel free to send any additions and/or modifications/corrections. All code is licensed under MIT, so don't hesitate in using any of the implementations in your own projects.
