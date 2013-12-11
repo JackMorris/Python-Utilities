@@ -12,9 +12,8 @@ import random
 
 def rand_list(count=100, min_val=-1000000, max_val=1000000):
     result_list = []
-    while count > 0:
+    for i in range(count, 0, -1):
         result_list.append(random.randint(min_val, max_val))
-        count -= 1
     return result_list
 
 
