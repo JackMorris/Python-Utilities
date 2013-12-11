@@ -3,12 +3,12 @@ class BinarySearchTree:
 
     class _Node:
         """ Inner class used for a node in the tree. Contains a key, value, and references to left, right and parent """
-        def __init__(self, k, v, left=None, right=None, parent=None):
-            self.k = k
-            self.v = v
-            self.l = left
-            self.r = right
-            self.p = parent
+        def __init__(self, key, val, left=None, right=None, parent=None):
+            self.key = key
+            self.val = val
+            self.left = left
+            self.right = right
+            self.parent = parent
 
     def __init__(self):
         """ Initialise an empty BST. Complexity: O(1) """
@@ -16,93 +16,93 @@ class BinarySearchTree:
 
     def _get_min_child_node_from_node(self, node):
         """ Returns the minimum values node which is a child of node. Called by delete() """
-        while not(node.l is None):
-            node = node.l
+        while not(node.left is None):
+            node = node.left
         return node
 
-    def _transplant(self, t, r):
-        """ Replaces subtree rooted at t with that rooted at r. Called by delete() """
-        if t.p is None:
-            self.root = r
-        elif t == t.p.l:
-            t.p.l = r
+    def _transplant(self, dest_tree, new_tree):
+        """ Replaces subtree rooted at dest_tree with that rooted at new_tree. Called by delete() """
+        if dest_tree.parent is None:
+            self.root = new_tree
+        elif dest_tree == dest_tree.parent.left:
+            dest_tree.parent.left = new_tree
         else:
-            t.p.r = r
-        if not(r is None):
-            r.p = t.p
+            dest_tree.parent.right = new_tree
+        if not(new_tree is None):
+            new_tree.parent = dest_tree.parent
 
-    def contains(self, k):
-        """ Returns True if key k is in the tree, otherwise False. Complexity: O(lgn) """
+    def contains(self, key):
+        """ Returns True if key is in the tree, otherwise False. Complexity: O(lgn) """
         current_node = self.root
         while not(current_node is None):
-            if k < current_node.k:
-                current_node = current_node.l
-            elif k > current_node.k:
-                current_node = current_node.r
+            if key < current_node.key:
+                current_node = current_node.left
+            elif key > current_node.key:
+                current_node = current_node.right
             else:
                 return True
         return False
 
-    def get(self, k):
-        """ Returns the value associated with key k from tree. Complexity: O(lgn) """
+    def get(self, key):
+        """ Returns the value associated with key from tree. Complexity: O(lgn) """
         current_node = self.root
         while True:
             if current_node is None:
                 raise KeyError("no value associated with key in tree")
-            if k < current_node.k:
-                current_node = current_node.l
-            elif k > current_node.k:
-                current_node = current_node.r
+            if key < current_node.key:
+                current_node = current_node.left
+            elif key > current_node.key:
+                current_node = current_node.right
             else:
-                return current_node.v
+                return current_node.val
 
-    def set(self, k, v):
-        """ Sets key k to value v to the tree, adding it if it doesn't already exist. Complexity: O(lgn) """
+    def set(self, key, val):
+        """ Sets key to value val in the tree, adding it if it doesn't already exist. Complexity: O(lgn) """
         if self.root is None:
-            self.root = self._Node(k, v)
+            self.root = self._Node(key, val)
             return
         current_node = self.root
         while True:
-            if k < current_node.k:
-                if current_node.l is None:
-                    current_node.l = self._Node(k, v)
-                    current_node.l.p = current_node
+            if key < current_node.key:
+                if current_node.left is None:
+                    current_node.left = self._Node(key, val)
+                    current_node.left.parent = current_node
                     return
                 else:
-                    current_node = current_node.l
-            elif k > current_node.k:
-                if current_node.r is None:
-                    current_node.r = self._Node(k, v)
-                    current_node.r.p = current_node
+                    current_node = current_node.left
+            elif key > current_node.key:
+                if current_node.right is None:
+                    current_node.right = self._Node(key, val)
+                    current_node.right.parent = current_node
                     return
                 else:
-                    current_node = current_node.r
+                    current_node = current_node.right
             else:
-                current_node.v = v
+                current_node.val = val
                 return
 
-    def delete(self, k):
-        """ Removes key k from tree. Complexity: O(lgn) """
+    def delete(self, key):
+        """ Removes key from tree. Complexity: O(lgn) """
         node_to_delete = self.root
         while True:
             if node_to_delete is None:
                 raise ValueError("value not in tree")
-            if k < node_to_delete.k:
-                node_to_delete = node_to_delete.l
-            elif k > node_to_delete.k:
-                node_to_delete = node_to_delete.r
+            if key < node_to_delete.key:
+                node_to_delete = node_to_delete.left
+            elif key > node_to_delete.key:
+                node_to_delete = node_to_delete.right
             else:
                 break
-        if node_to_delete.l is None:
-            self._transplant(node_to_delete, node_to_delete.r)
-        elif node_to_delete.r is None:
-            self._transplant(node_to_delete, node_to_delete.l)
+        if node_to_delete.left is None:
+            self._transplant(node_to_delete, node_to_delete.right)
+        elif node_to_delete.right is None:
+            self._transplant(node_to_delete, node_to_delete.left)
         else:
-            succ_node = self._get_min_child_node_from_node(node_to_delete.r)
-            if succ_node.p != node_to_delete:
-                self._transplant(succ_node, succ_node.r)
-                succ_node.r = node_to_delete.r
-                succ_node.r.p = succ_node
+            succ_node = self._get_min_child_node_from_node(node_to_delete.right)
+            if succ_node.parent != node_to_delete:
+                self._transplant(succ_node, succ_node.right)
+                succ_node.right = node_to_delete.right
+                succ_node.right.parent = succ_node
             self._transplant(node_to_delete, succ_node)
-            succ_node.l = node_to_delete.l
-            succ_node.l.p = succ_node
+            succ_node.left = node_to_delete.left
+            succ_node.left.parent = succ_node
