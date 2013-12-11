@@ -1,5 +1,6 @@
 class vEBTree:
-    """ Implementation of a van Emde Boas Tree; an efficient priority queue for when the key universe size is known """
+    """ Implementation of a van Emde Boas Tree; an efficient priority queue for when the key universe size is known.
+    Tree can contain any key k, 0 <= k < u """
 
     def __init__(self, k):
         """ Initialises an empty vEB tree, u = 2**2**k. Complexity: O(1) """
@@ -109,7 +110,6 @@ class vEBTree:
 
     def delete(self, x):
         """ Deletes x from the tree. Assume x is already a member. Complexity: O(k). """
-
         if self.min == self.max:
             self.min = None
             self.max = None
