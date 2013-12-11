@@ -1,33 +1,14 @@
-Python-Utilities
-================
+#### **_<p align="center">A collection of various algorithm implementations, helper scrips and other small interesting programs, all implemented in Python 3.</p>_**
 
-A collection of various algorithm implementations, helper scrips and other small interesting programs, all implemented in Python 3.
+Organisation
+============
 
-### Sorting Algorithms
+The repository is organised into directories denoting the content, eg. `Sorting/` for sorting algorithms. These directories contain modules for each script/algorithm implementation, as well as two key files:
 
-Located in `Sorting/`. Refer to `Sorting/SORTING-README.md` for more information. Unit tests can be found in `Sorting/tests.py`.
-
-* Bubble sort
-* Counting sort
-* Heap sort
-* Insertion sort
-* Merge sort
-* Quicksort
-* Radix sort
-* Selection sort
-
-### Data Structures
-
-Located in `DataStructures/`. Refer to `DataStructures/DATASTRUCTURES-README.md` for more information. Unit tests can be found in `DataStructures/tests.py`.
-
-* Binary search tree
-* Binary tree
-* Double-ended queue
-* Linked list
-* Stack
-* Van Emde Boas tree
+* `<DIRECOTRY>-README.md` - short readme file containing further information regarding what's in the directory
+* `tests.py` - unit tests for the modules in the directory
 
 Contributing
-------------
+============
 
-Feel free to fork and send pull requests with any additions or modifications/corrections. All code is licensed under MIT.
+Pull requests welcome! Feel free to send any additions and/or modifications/corrections. All code is licensed under MIT, so don't hesitate in using any of the implementaions in your own projects.
