@@ -23,3 +23,13 @@ class Decoder:
 
         y = numeric_representation >> (first_one_position + 1)
         return x, y
+
+    @staticmethod
+    def decode_list(numeric_representation):
+        """ Inverse operation of Encoder.encode_list(). (Documentation in encoder.py) """
+        if not isinstance(numeric_representation, int) or numeric_representation < 0:
+            raise ValueError("Numeric representation must be a natural number")
+        if numeric_representation == 0:
+            return []
+        head, tail_representation = Decoder.decode_pair(numeric_representation)
+        return Decoder.decode_list(tail_representation).insert(0, head)
