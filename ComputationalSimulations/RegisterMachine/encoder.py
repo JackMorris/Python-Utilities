@@ -6,7 +6,7 @@ class Encoder:
         pass
 
     @staticmethod
-    def encode_pair(pair, fat='True'):
+    def encode_pair(pair, fat=True):
         """ Takes in a sequence of a pair of numbers (x,y). Returns a numerical representation of that pair.
         This can be done in two ways:
             'Fat' encoding:      <<x,y>> = 2^x(2y+1)
@@ -27,3 +27,4 @@ class Encoder:
         if not fat:
             encoding -= 1
         return encoding
+
