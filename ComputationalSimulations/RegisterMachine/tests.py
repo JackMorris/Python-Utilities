@@ -59,3 +59,13 @@ class TestEncoder(unittest.TestCase):
 
     def test_encode_list_non_int_raises(self):
         self.assertRaises(ValueError, Encoder.encode_list, ([1, 2, 8, 'Hello, world!', 2]))
+
+    def test_encode_program_instructions_empty(self):
+        self.assertEqual(Encoder.encode_program_instructions([]), 0)
+
+    def test_encode_program_instructions_two(self):
+        self.assertEqual(Encoder.encode_program_instructions(["R0- -> L0, L2", "HALT"]), 786432)
+
+    def test_encode_program_instructions_five(self):
+        program_instructions = ["R0+ -> L0", "R0+ -> L0", "HALT", "R0- -> L0, L0", "R0+ -> L0"]
+        self.assertEqual(Encoder.encode_program_instructions(program_instructions), 666)
