@@ -140,3 +140,8 @@ class TestEncodeDecode(unittest.TestCase):
     def test_decode_encode_list(self):
         numerical_representation = random.randint(1, 10000)
         self.assertEqual(Encoder.encode_list(Decoder.decode_list(numerical_representation)), numerical_representation)
+
+    def test_decode_encode_program(self):
+        numerical_representation = random.randint(100, 10000)
+        self.assertEqual(Encoder.encode_program_instructions(
+            Decoder.decode_program_instructions(numerical_representation)), numerical_representation)
