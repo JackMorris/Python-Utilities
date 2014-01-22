@@ -1,7 +1,7 @@
 /ComputationalSimulations
 ===============
 
-The directories here contain different simulations of computational models. All are pretty different, so much more implementation information is available in a README in each directory.
+The directories here contain different simulations of computational models. All are pretty different, so more documentation is available throughout the code.
 
 What's Included (so far)
 ========================
