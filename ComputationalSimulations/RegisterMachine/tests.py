@@ -1,5 +1,6 @@
 import unittest
 from encoder import Encoder
+from decoder import Decoder
 
 
 class TestEncoder(unittest.TestCase):
@@ -72,3 +73,17 @@ class TestEncoder(unittest.TestCase):
 
     def test_encode_program_instructions_incorrect_format_raise(self):
         self.assertRaises(ValueError, Encoder.encode_program_instructions, ["Ro+ -> L1", "-> L2"])
+
+
+class TestDecoder(unittest.TestCase):
+    def test_decode_pair_zero(self):
+        self.assertEqual(Decoder.decode_pair(0, fat=False), (0, 0))
+
+    def test_decode_pair_one_fat(self):
+        self.assertEqual(Decoder.decode_pair(1), (0, 0))
+
+    def test_decode_pair_fat(self):
+        self.assertEqual(Decoder.decode_pair(396), (2, 49))
+
+    def test_decode_pair(self):
+        self.assertEqual(Decoder.decode_pair(415, fat=False), (5, 6))
