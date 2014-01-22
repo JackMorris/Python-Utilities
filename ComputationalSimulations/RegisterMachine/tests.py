@@ -69,3 +69,6 @@ class TestEncoder(unittest.TestCase):
     def test_encode_program_instructions_five(self):
         program_instructions = ["R0+ -> L0", "R0+ -> L0", "HALT", "R0- -> L0, L0", "R0+ -> L0"]
         self.assertEqual(Encoder.encode_program_instructions(program_instructions), 666)
+
+    def test_encode_program_instructions_incorrect_format_raise(self):
+        self.assertRaises(ValueError, Encoder.encode_program_instructions, ["Ro+ -> L1", "-> L2"])
