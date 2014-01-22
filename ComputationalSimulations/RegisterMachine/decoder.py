@@ -32,4 +32,4 @@ class Decoder:
         if numeric_representation == 0:
             return []
         head, tail_representation = Decoder.decode_pair(numeric_representation)
-        return Decoder.decode_list(tail_representation).insert(0, head)
+        return [head] + Decoder.decode_list(tail_representation)
