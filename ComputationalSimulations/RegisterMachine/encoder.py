@@ -1,3 +1,5 @@
+import re
+
 class Encoder:
     """ Class to encode descriptions of Register Machine programs as numbers. """
 
@@ -44,3 +46,46 @@ class Encoder:
             raise ValueError("Input list must only contains natural numbers")
         encoded_tail = Encoder.encode_list(value_list[1:])
         return Encoder.encode_pair((head, encoded_tail))
+
+    @staticmethod
+    def encode_program_instructions(program_instructions):
+        """ Takes in a list of program instructions (each a string). Returns a numerical representation of the program.
+        Each instruction must be in one of the three forms:
+            R(i)+ -> L(j)       Add one to register i, jump to instruction j
+            R(i)- -> L(j), L(k) If register i > 0, decrement, jump to instruction j. Otherwise jump to instruction k
+            HALT                Stop computation
+        Note: whitespace and letter case is not important in the representations.
+        Instructions are labelled in order in the list, from L(0) increasing.
+        """
+        coded_instructions = []
+        for instruction_string in program_instructions:
+            coded_instruction = Encoder._encode_instruction_string(instruction_string)
+            coded_instructions.append(coded_instruction)
+        return Encoder.encode_list(coded_instructions)
+
+    @staticmethod
+    def _encode_instruction_string(instruction_string):
+        """ Returns the numerical representation of instruction string. Instruction string must be in the format
+        described above.
+        """
+        if not isinstance(str, instruction_string):
+            raise ValueError("Instruction string must be a string to encode.")
+        instruction_string = instruction_string.lower().replace(" ", "")    # Lower case and remove all whitespace
+        if instruction_string == "halt":
+            return 0
+
+        # Use regular expression to pull out instruction contents
+        match = re.match(r"^r\((\d+)\)\+->l\((\d+)\)$", instruction_string)  # Match for r(i)+->l(j)
+        if len(match.groups()) == 2:
+            register_index = int(match.group(0))
+            next_instruction = int(match.group(1))
+            return Encoder.encode_pair((2*register_index, next_instruction))
+        match = re.match(r"^r\((\d)\)\-->L\((\d)\),\((\d)\)$", instruction_string)  # Match for r(i)-->l(j),l(k)
+        if len(match.groups()) == 3:
+            register_index = int(match.group(0))
+            positive_instruction = int(match.group(1))
+            zero_instruction = int(match.group(2))
+            encoded_next_instructions = Encoder.encode_pair((positive_instruction, zero_instruction), fat=False)
+            return Encoder.encode_pair((2*register_index + 1, encoded_next_instructions))
+        # No match, instruction string in incorrect format
+        raise ValueError("Incorrect format for instruction string.")
