@@ -1,4 +1,5 @@
 import unittest
+import random
 from encoder import Encoder
 from decoder import Decoder
 
@@ -87,3 +88,14 @@ class TestDecoder(unittest.TestCase):
 
     def test_decode_pair(self):
         self.assertEqual(Decoder.decode_pair(415, fat=False), (5, 6))
+
+
+class TestEncodeDecode(unittest.TestCase):
+    def test_encode_decode_pair(self):
+        x = random.randint(0, 10000)
+        y = random.randint(0, 10000)
+        self.assertEqual(Decoder.decode_pair(Encoder.encode_pair((x, y))), (x, y))
+
+    def test_decode_encode_pair(self):
+        numerical_representation = random.randint(1, 10000)
+        self.assertEqual(Encoder.encode_pair(Decoder.decode_pair(numerical_representation)), numerical_representation)
