@@ -104,6 +104,22 @@ class TestDecoder(unittest.TestCase):
     def test_decode_list_three_values(self):
         self.assertEqual(Decoder.decode_list(276), [2, 1, 3])
 
+    def test_decode_program_instructions_empty(self):
+        self.assertEqual(Decoder.decode_program_instructions(0), [])
+
+    def test_decode_program_instructions_two(self):
+        self.assertEqual(Decoder.decode_program_instructions(786432), ["R0- -> L0, L2", "HALT"])
+
+    def test_decode_program_instructions_five(self):
+        program_instructions = ["R0+ -> L0", "R0+ -> L0", "HALT", "R0- -> L0, L0", "R0+ -> L0"]
+        self.assertEqual(Decoder.decode_program_instructions(666), program_instructions)
+
+    def test_decode_program_negative_raises(self):
+        self.assertRaises(ValueError, Decoder.decode_program_instructions, -3)
+
+    def test_decode_program_non_int_raises(self):
+        self.assertRaises(ValueError, Decoder.decode_program_instructions, 'Hello, world!')
+
 
 class TestEncodeDecode(unittest.TestCase):
     def test_encode_decode_pair(self):

@@ -50,8 +50,8 @@ class Decoder:
         x, y = Decoder.decode_pair(numeric_representation)
         if x % 2 == 0:
             # x even, Instruction is Rx/2+ -> Ly
-            return "R" + str(x/2) + "+ -> L" + str(y)
+            return "R" + str(int(x/2)) + "+ -> L" + str(y)
         else:
             # x odd. y = <j, k>. Instruction is R(x-1)/2- -> Lj, Lk
             j, k = Decoder.decode_pair(y, fat=False)
-            return "R" + str((x-1)/2) + "- -> L" + str(j) + ", L" + str(k)
+            return "R" + str(int((x-1)/2)) + "- -> L" + str(j) + ", L" + str(k)
