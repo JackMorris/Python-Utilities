@@ -51,8 +51,8 @@ class Encoder:
     def encode_program_instructions(program_instructions):
         """ Takes in a list of program instructions (each a string). Returns a numerical representation of the program.
         Each instruction must be in one of the three forms:
-            R(i)+ -> L(j)       Add one to register i, jump to instruction j
-            R(i)- -> L(j), L(k) If register i > 0, decrement, jump to instruction j. Otherwise jump to instruction k
+            Ri+ -> Lj           Add one to register i, jump to instruction j
+            Ri- -> Lj, Lk       If register i > 0, decrement, jump to instruction j. Otherwise jump to instruction k
             HALT                Stop computation
         Note: whitespace and letter case is not important in the representations.
         Instructions are labelled in order in the list, from L(0) increasing.
@@ -68,23 +68,23 @@ class Encoder:
         """ Returns the numerical representation of instruction string. Instruction string must be in the format
         described above.
         """
-        if not isinstance(str, instruction_string):
+        if not isinstance(instruction_string, str):
             raise ValueError("Instruction string must be a string to encode.")
         instruction_string = instruction_string.lower().replace(" ", "")    # Lower case and remove all whitespace
         if instruction_string == "halt":
             return 0
 
         # Use regular expression to pull out instruction contents
-        match = re.match(r"^r\((\d+)\)\+->l\((\d+)\)$", instruction_string)  # Match for r(i)+->l(j)
-        if len(match.groups()) == 2:
-            register_index = int(match.group(0))
-            next_instruction = int(match.group(1))
+        match = re.match(r"^r(\d+)\+->l(\d+)$", instruction_string)  # Match for r(i)+->l(j)
+        if match is not None:
+            register_index = int(match.group(1))
+            next_instruction = int(match.group(2))
             return Encoder.encode_pair((2*register_index, next_instruction))
-        match = re.match(r"^r\((\d)\)\-->L\((\d)\),\((\d)\)$", instruction_string)  # Match for r(i)-->l(j),l(k)
-        if len(match.groups()) == 3:
-            register_index = int(match.group(0))
-            positive_instruction = int(match.group(1))
-            zero_instruction = int(match.group(2))
+        match = re.match(r"^r(\d+)-->l(\d+),l(\d+)$", instruction_string)  # Match for r(i)-->l(j),l(k)
+        if match is not None:
+            register_index = int(match.group(1))
+            positive_instruction = int(match.group(2))
+            zero_instruction = int(match.group(3))
             encoded_next_instructions = Encoder.encode_pair((positive_instruction, zero_instruction), fat=False)
             return Encoder.encode_pair((2*register_index + 1, encoded_next_instructions))
         # No match, instruction string in incorrect format
