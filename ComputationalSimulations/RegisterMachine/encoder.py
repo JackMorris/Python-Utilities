@@ -28,3 +28,19 @@ class Encoder:
             encoding -= 1
         return encoding
 
+    @staticmethod
+    def encode_list(value_list):
+        """ Takes in a list of any length of natural numbers. Returns a numerical representation of that list.
+        This is calculated using encode_pair above.
+            encode_list([]) = 0
+            encode_list(x::l) = <<x, encode_list(l)>>
+        where [] is the empty list, x::l is the list constructed by appending x to the front of a list l.
+        encode_list is a bijection between lists of natural numbers and natural numbers.
+        """
+        if len(value_list) == 0:
+            return 0
+        head = value_list[0]
+        if (not isinstance(head, int)) or head < 0:
+            raise ValueError("Input list must only contains natural numbers")
+        encoded_tail = Encoder.encode_list(value_list[1:])
+        return Encoder.encode_pair((head, encoded_tail))
