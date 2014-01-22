@@ -108,3 +108,13 @@ class TestEncodeDecode(unittest.TestCase):
     def test_decode_encode_pair(self):
         numerical_representation = random.randint(1, 10000)
         self.assertEqual(Encoder.encode_pair(Decoder.decode_pair(numerical_representation)), numerical_representation)
+
+    def test_encode_decode_list(self):
+        check_list = []
+        for i in range(0, random.randint(5, 15)):
+            check_list.append(random.randint(0, 500))
+        self.assertEqual(Decoder.decode_list(Encoder.encode_list(check_list)), check_list)
+
+    def test_decode_encode_list(self):
+        numerical_representation = random.randint(1, 10000)
+        self.assertEqual(Encoder.encode_list(Decoder.decode_list(numerical_representation)), numerical_representation)
