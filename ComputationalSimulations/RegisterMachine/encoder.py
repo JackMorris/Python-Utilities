@@ -20,6 +20,9 @@ class Encoder:
         if not len(pair) == 2:
             raise ValueError("Passed in pair must contain two values, x and y.")
         x, y = pair
+        if (not isinstance(x, int)) or x < 0 or (not isinstance(y, int)) or y < 0:
+            raise ValueError("Values in list must be natural numbers (integers > 0")
+
         encoding = (2**x) * (2*y + 1)
         if not fat:
             encoding -= 1
