@@ -89,6 +89,15 @@ class TestDecoder(unittest.TestCase):
     def test_decode_pair(self):
         self.assertEqual(Decoder.decode_pair(415, fat=False), (5, 6))
 
+    def test_decode_list_empty(self):
+        self.assertEqual(Decoder.decode_list(0), [])
+
+    def test_decode_list_single_value(self):
+        self.assertEqual(Decoder.decode_list(8), [3])
+
+    def test_decode_list_three_values(self):
+        self.assertEqual(Decoder.decode_list(276), [2, 1, 3])
+
 
 class TestEncodeDecode(unittest.TestCase):
     def test_encode_decode_pair(self):
