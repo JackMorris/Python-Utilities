@@ -89,6 +89,12 @@ class TestDecoder(unittest.TestCase):
     def test_decode_pair(self):
         self.assertEqual(Decoder.decode_pair(415, fat=False), (5, 6))
 
+    def test_decode_list_negative_raises(self):
+        self.assertRaises(ValueError, Decoder.decode_list, [2, 3, -4, 1])
+
+    def test_decode_list_non_int_raises(self):
+        self.assertRaises(ValueError, Decoder.decode_list, [1, 7, 'Hello, world!', 4])
+
     def test_decode_list_empty(self):
         self.assertEqual(Decoder.decode_list(0), [])
 
