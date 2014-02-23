@@ -17,7 +17,10 @@ def encode(plaintext, key):
     output = ""
     for character in plaintext:
         character_numeral = ord(character)
-        output += chr((((character_numeral - 65) + key_numeral) % 26) + 65)
+        if character_numeral < 65 or character_numeral > 90:
+            output += character
+        else:
+            output += chr((((character_numeral - 65) + key_numeral) % 26) + 65)
     return output
 
 
