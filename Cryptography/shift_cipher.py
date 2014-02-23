@@ -1,20 +1,35 @@
 """ Shift Cipher
 
-brute_force_search(cipher_text) performs a brute-force key search on cipher_text (searching all keys A-Z), where
-cipher_text has been encoded using a standard shift-cipher. All 26 possible plain text messages are printed and should
-then be checked manually.
+Provides operations allowing the encoding and decoding of text using a standard shift cipher. Also includes a method to
+perform a brute-force search for a key in the key space of a shift cipher.
 
 """
 
-def brute_force_search(cipher_text):
-    cipher_text = cipher_text.upper()
-    for key_numeral in range(0, 26):
-        key = chr(key_numeral + 65)
-        print(key + ":\t", end="")
 
-        for character in cipher_text:
-            character_numeral = ord(character)
-            decoded_character_numeral = (((character_numeral - 65) + key_numeral) % 26) + 65
-            decoded_character = chr(decoded_character_numeral)
-            print(decoded_character, end="")
-        print("\n", end="")
+def encode(plaintext, key):
+    """ Encode a given plaintext string using a shift cipher with the given key. """
+    key = key.upper()
+    key_numeral = ord(key) - 65
+    plaintext = plaintext.upper()
+    if key_numeral < 0 or key_numeral > 25:
+        raise ValueError("Key must be in range A-Z")
+
+    output = ""
+    for character in plaintext:
+        character_numeral = ord(character)
+        output += chr((((character_numeral - 65) + key_numeral) % 26) + 65)
+    return output
+
+
+def decode(ciphertext, key):
+    """ Decode a given plaintext string using a shift cipher with the given key. """
+    key_numeral = ord(key) - 65
+    return encode(ciphertext, chr((26 - key_numeral) % 26))
+
+
+def brute_force_search(ciphertext):
+    """ Enumerate all possible keys allowing a user to determine the key for a shift cipher and a given ciphertext. """
+    ciphertext = ciphertext.upper()
+    for key in [chr(c+65) for c in range(0, 26)]:
+        decoded_ciphertext = decode(ciphertext, key)
+        print(key + ":\t" + decoded_ciphertext)
