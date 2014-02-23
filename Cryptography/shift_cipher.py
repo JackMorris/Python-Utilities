@@ -33,6 +33,16 @@ def decode(ciphertext, key):
 def brute_force_search(ciphertext):
     """ Enumerate all possible keys allowing a user to determine the key for a shift cipher and a given ciphertext. """
     ciphertext = ciphertext.upper()
+    result = []
     for key in [chr(c+65) for c in range(0, 26)]:
         decoded_ciphertext = decode(ciphertext, key)
-        print(key + ":\t" + decoded_ciphertext)
+        result.append(decoded_ciphertext)
+    return result
+
+
+def print_brute_force_search(search_results):
+    """ Prints the result of the above method labelling each item with the key that resulted in it. """
+    if not(len(search_results) == 26):
+        raise ValueError("Search results must contain 26 entries")
+    for i in range(0, 26):
+        print(chr(i + 65) + ":\t" + search_results[i])
