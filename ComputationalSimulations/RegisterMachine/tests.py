@@ -2,6 +2,7 @@ import unittest
 import random
 from encoder import Encoder
 from decoder import Decoder
+from register_machine import RegisterMachine
 
 
 class TestEncoder(unittest.TestCase):
@@ -145,3 +146,13 @@ class TestEncodeDecode(unittest.TestCase):
         numerical_representation = random.randint(100, 10000)
         self.assertEqual(Encoder.encode_program_instructions(
             Decoder.decode_program_instructions(numerical_representation)), numerical_representation)
+
+
+class TestRM(unittest.TestCase):
+    def test_RM_1(self):
+        result = RegisterMachine.compute(["R0- -> L1,L2", "R0- -> L0,L1", "HALT"], [], print_steps=False, delay=0)
+        self.assertEqual(result, [0])
+
+    def test_RM_2(self):
+        result = RegisterMachine.compute(["R0+ -> L1", "R0+ -> L2", "R0- -> L2,L3", "R0+ -> L4", "HALT"], [], print_steps=False, delay=0)
+        self.assertEqual(result, [1])
