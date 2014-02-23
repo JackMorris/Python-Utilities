@@ -27,7 +27,7 @@ def encode(plaintext, key):
 def decode(ciphertext, key):
     """ Decode a given plaintext string using a shift cipher with the given key. """
     key_numeral = ord(key) - 65
-    return encode(ciphertext, chr((26 - key_numeral) % 26))
+    return encode(ciphertext, chr(((26 - key_numeral) % 26) + 65))
 
 
 def brute_force_search(ciphertext):
