@@ -6,6 +6,8 @@ Each module contains an implementation of some cryptographic algorithm. Document
 What's Included (so far)
 ========================
 
+* Shift Cipher
+
 Tests
 =====
 
