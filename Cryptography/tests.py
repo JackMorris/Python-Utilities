@@ -26,3 +26,8 @@ class TestShiftCipher(unittest.TestCase):
 
     def test_invalid_key_Raise(self):
         self.assertRaises(ValueError, shift_cipher.encode, "A", "_")
+
+    def test_brute_force(self):
+        brute_force_result = shift_cipher.brute_force_search("HELLO WORLD")
+        for i in range(0, 26):
+            self.assertEqual(shift_cipher.encode(brute_force_result[i], chr(i + 65)), "HELLO WORLD")
