@@ -7,6 +7,7 @@ What's Included (so far)
 ========================
 
 * Register Machine (http://en.wikipedia.org/wiki/Register_machine)
+* Brainfuck (http://en.wikipedia.org/wiki/Brainfuck)
 
 Tests
 =====
